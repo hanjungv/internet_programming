@@ -31,3 +31,28 @@
 * 2017.09.26 폼에서 자바스크립트 밸류 추출하는 과제 생성중(과제가 아직 안나옴..)
 * 2017.09.29 폼에서 자바스크립트 밸류 추출하는 과제 완료(따로 파일 만들어서 유지)
 * 2017.10.01 백그라운드 이미지 추가.(이미지는 velopert님 깃헙[https://raw.githubusercontent.com/velopert/bitimulate/master/bitimulate-frontend/src/static/images/background.png](https://raw.githubusercontent.com/velopert/bitimulate/master/bitimulate-frontend/src/static/images/background.png))에서 가지고 왔습니다. 문제시 삭제하겠습니다.
+* 2017.11.18 JSP페이지로 전부 변경, 뷰 페이지 로직 페이지 분리, 메인 페이지 생성(뭔가 허접..)
+
+
+
+----- 
+
+## 필수스펙
+* 완료 
+1. 웹툰 생성, 시리즈 생성, 웹툰 리스트, 시리즈 리스트 뷰 완성
+
+
+* 완료 안된것
+1. 생성 시 밸리데이션(JS, DB 둘 다)
+2. 디비 모델링
+3. mysql connector 해서 연결시키고 반영되게
+
+### 추가 스펙
+* 완료 
+
+
+* 완료 안된것
+1.검색 시 비동기식으로 호출(라이브 서치)
+2.로그인(?), 작가만 생성할 수 있게. 권한 각각 다르게 주기
+3.디자인 개선(모바일 환경에서도)
+
