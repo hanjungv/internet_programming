@@ -11,7 +11,10 @@
           <a class="nav-link" href="/12114497_Hanjung/webtoon_list.jsp">웹툰 리스트</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">로그인</a>
+          <a class="nav-link" href="/12114497_Hanjung/login.jsp">로그인</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/12114497_Hanjung/register.jsp">회원가입</a>
         </li>
       </ul>
     </div>

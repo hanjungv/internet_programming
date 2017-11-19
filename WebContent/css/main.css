@@ -227,3 +227,10 @@ pre{
 	  width: 60%;
 	}
 }
+.text-center{
+		margin-top:15px;
+		text-align:center;
+}
+.form-check-input{
+		margin-right:5px;
+}
