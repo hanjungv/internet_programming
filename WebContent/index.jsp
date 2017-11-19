@@ -3,12 +3,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>웹툰 리스트</title>
+<jsp:include page="./view/css_default.jsp"></jsp:include>
 </head>
 <body>
-<%
-	response.sendRedirect("./src/index.jsp");
-%>
+  <jsp:include page="./view/index.jsp"></jsp:include>
+  <jsp:include page="./view/script_default.jsp"></jsp:include>
 </body>
 </html>
