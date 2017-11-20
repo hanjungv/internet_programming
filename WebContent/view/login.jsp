@@ -3,7 +3,7 @@
   <jsp:include page="./header.jsp"></jsp:include>
   <!-- navbar finish -->
   <div class = "bg-polygon">
-    <div class="container container-custom col-sm-5 col-xs-5">
+    <div class="container container-custom col-sm-3 col-xs-3">
       <div class="form-div-custom">
         <h2>로그인</h2>
         <hr>

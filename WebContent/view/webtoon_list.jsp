@@ -6,7 +6,7 @@
 	<div class="container container-custom">
 	  <h2>웹툰 리스트</h2>
 	  <div class="guide-button-div">
-	    <button type="button" class="btn btn-outline-success btn-sm margin-r-5"><span class="glyphicons glyphicons-plus"></span>웹툰 추가</button>
+	    <button type="button" class="btn btn-outline-success btn-sm margin-r-5"onClick="window.location.href = '/12114497_Hanjung/webtoon_new.jsp'"><span class="glyphicons glyphicons-plus"></span>웹툰 추가</button>
 	    <button type="button" class="btn btn-outline-danger btn-sm margin-r-5" id="selectedRemoveBtn">선택 삭제</button>
 	    <button type="button" class="btn btn-outline-primary btn-sm margin-r-5" id="selectedResetBtn">선택 초기화</button>
 	    <div class="search-div">

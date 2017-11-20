@@ -9,7 +9,7 @@
       <div class="form-div-custom">
         <h2>웹툰 등록</h2>
         <hr/>
-        <form method="post" action="webtoon_result.jsp">
+        <form method="post" action="/12114497_Hanjung/save_webtoon.jsp">
           <div class="form-group row">
             <label for="title" class="col-sm-12 col-form-label">제목</label>
             <div class="col-sm-12">
@@ -26,10 +26,6 @@
                 <option value="horror">호러</option>
                 <option value="drama">드라마</option>
               </select>
-            </div>
-            <label for="writer" class="col-sm-12 col-form-label">작가명</label>
-            <div class="col-sm-12">
-              <input type="text" name="writer" class="form-control" id="writer" placeholder="작가명을 입력하세요!">
             </div>
           </div>
           <div class="form-group row">
