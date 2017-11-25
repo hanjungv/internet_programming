@@ -9,7 +9,7 @@
       <div class="form-div-custom">
         <h2>웹툰 등록</h2>
         <hr/>
-        <form method="post" action="/12114497_Hanjung/webtoonSaveProc.jsp" enctype="multipart/form-data">
+        <form method="post" action="/12114497_Hanjung/webtoonSaveProc.jsp">
           <div class="form-group row">
             <label for="title" class="col-sm-12 col-form-label">제목</label>
             <div class="col-sm-12">

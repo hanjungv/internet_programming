@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" 
 import="java.sql.*, org.cartoon.inha.DBCon, org.cartoon.inha.SecurityUtil" %>
 <%
+	if(session.getAttribute("email") != null){
+    response.sendRedirect("/12114497_Hanjung/index.jsp");
+	}
+%>
+<%
 
 	request.setCharacterEncoding("utf-8");
 

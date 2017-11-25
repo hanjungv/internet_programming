@@ -7,9 +7,6 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav navbar-nav-custom">
-        <li class="nav-item">
-          <a class="nav-link" href="/12114497_Hanjung/webtoon_list.jsp">웹툰 리스트</a>
-        </li>
         <%
 					if(session.getAttribute("email") == null){
 						%>
@@ -22,6 +19,9 @@
 						<%
 					}else {
 						%>
+						<li class="nav-item">
+		          <a class="nav-link" href="/12114497_Hanjung/webtoon_list.jsp">웹툰 리스트</a>
+		        </li>
 						<li class="nav-item">
 		          <a class="nav-link" href="/12114497_Hanjung/logoutProc.jsp">로그아웃</a>
 		        </li>
