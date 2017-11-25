@@ -33,7 +33,8 @@
 * 2017.10.01 백그라운드 이미지 추가.(이미지는 velopert님 깃헙[https://raw.githubusercontent.com/velopert/bitimulate/master/bitimulate-frontend/src/static/images/background.png](https://raw.githubusercontent.com/velopert/bitimulate/master/bitimulate-frontend/src/static/images/background.png))에서 가지고 왔습니다. 문제시 삭제하겠습니다.
 * 2017.11.18 JSP페이지로 전부 변경, 뷰 페이지 로직 페이지 분리, 메인 페이지 생성(뭔가 허접..)
 * 2017.11.19 DB 테이블 생성(admin 생성), 모델링 
-<img src = "DB-ER.png"/>
+<img src = "DB-ER.png"/><br/>
+* 2017.11.25 mysql bean 분리 
 
 ----- 
 

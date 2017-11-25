@@ -7,15 +7,15 @@
       <div class="form-div-custom">
         <h2>회원 가입</h2>
         <hr>
-        <form method="POST" action="series_result.jsp">
+        <form method="POST" action="/12114497_Hanjung/registerProc.jsp">
           <div class="form-group row">
-            <label for="title" class="col-sm-12 col-form-label">이메일</label>
+            <label for="email" class="col-sm-12 col-form-label">이메일</label>
             <div class="col-sm-12">
               <input type="email" class="form-control" id="email" name="email" placeholder="이메일을 입력하세요" required>
             </div>
           </div>
           <div class="form-group row">
-            <label for="title" class="col-sm-12 col-form-label">비밀번호</label>
+            <label for="password" class="col-sm-12 col-form-label">비밀번호</label>
             <div class="col-sm-12">
               <input type="password" class="form-control" id="password" name="password" placeholder="비밀번호를 입력하세요">
             </div>
@@ -31,12 +31,12 @@
             <div class="col-sm-12">
 	            <div class="form-check">
 								<label class="form-check-label">
-									<input type="radio" class="form-check-input" id="is_writer" name="is_writer" value="Y">네
+									<input type="radio" class="form-check-input" id="is_writer" name="is_writer" value="1">네
 								</label>
 							</div>
 							<div class="form-check">
 								<label class="form-check-label">
-		             	<input type="radio" class="form-check-input" id="is_writer" name="is_writer" value="N" checked>아니요
+		             	<input type="radio" class="form-check-input" id="is_writer" name="is_writer" value="0" checked>아니요
 	               </label>
                </div>
             </div>

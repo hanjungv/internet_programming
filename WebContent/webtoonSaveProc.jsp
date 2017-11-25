@@ -1,13 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="java.sql.*"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" 
+import="java.sql.*, org.cartoon.inha.DBCon" %>
 <%
-	Class.forName("com.mysql.jdbc.Driver");
-	String DB_URL = "jdbc:mysql://localhost:3306/webtoon?useSSL=false";
-	String DB_USER = "admin";
-	String DB_PASSWORD= "1234";
-	
+	DBCon DriverManager = new DBCon();
 	Connection con= null;
 	PreparedStatement pstmt = null;
-	ResultSet rs   = null;
+	// ResultSet rs   = null;
+
+	request.setCharacterEncoding("utf-8");
 
 	String title = request.getParameter("title");
 	String genre = request.getParameter("genre");
@@ -16,7 +15,7 @@
 	int user_id = 1;
 	
 	try {
-	  con = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+	  con = DriverManager.getConnection();
 	  String query = "INSERT INTO cartoon(title, genre, summary, represent_img, user_id) VALUES(?,?,?,?,?)";
 	  
 	  pstmt = con.prepareStatement(query);
@@ -26,13 +25,14 @@
 	  pstmt.setString(4,represent_img);
 	  pstmt.setInt(5,user_id);
 	  
+	  pstmt.executeUpdate();
 	  
-	  con.close();
 	  pstmt.close();
+	  con.close();
 	  
+	  response.sendRedirect("/12114497_Hanjung/webtoon_list.jsp");
 	  
 	} catch(Exception e){
-		
+		System.out.println(e);
 	}
-	
 %>

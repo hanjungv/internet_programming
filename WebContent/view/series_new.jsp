@@ -7,7 +7,7 @@
       <div class="form-div-custom">
         <h2>시리즈 등록</h2>
         <hr>
-        <form method="POST" action="series_result.jsp">
+        <form method="POST" action="/12114497_Hanjung/seriesSaveProc.jsp" enctype="multipart/form-data">
           <div class="form-group row">
             <label for="title" class="col-sm-12 col-form-label">제목</label>
             <div class="col-sm-12">
