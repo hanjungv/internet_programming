@@ -30,7 +30,7 @@ import="java.sql.*, org.cartoon.inha.DBCon, org.cartoon.inha.SecurityUtil" %>
     int rowCount = rs.getRow();
     rs.beforeFirst();
 		if(rowCount==0){
-			query = "INSERT INTO user(email, password, name, is_writer) VALUES(?,?,?)";
+			query = "INSERT INTO user(email, password, name) VALUES(?,?,?)";
 		  
 		  pstmt = con.prepareStatement(query);
 		  pstmt.setString(1,email);
@@ -41,6 +41,7 @@ import="java.sql.*, org.cartoon.inha.DBCon, org.cartoon.inha.SecurityUtil" %>
 		  
 		  pstmt.close();
 		  con.close();
+		  rs.close();
 		  
 		  response.sendRedirect("/12114497_Hanjung/login.jsp");
 		} else {

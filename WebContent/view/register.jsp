@@ -26,21 +26,6 @@
               <input type="text" class="form-control" id="name" name="name" placeholder="이름을 입력하세요">
             </div>
           </div>
-          <div class="form-group row">
-            <label for="is_writer" class="col-sm-12 col-form-label">작가이신가요?</label>
-            <div class="col-sm-12">
-	            <div class="form-check">
-								<label class="form-check-label">
-									<input type="radio" class="form-check-input" id="is_writer" name="is_writer" value="1">네
-								</label>
-							</div>
-							<div class="form-check">
-								<label class="form-check-label">
-		             	<input type="radio" class="form-check-input" id="is_writer" name="is_writer" value="0" checked>아니요
-	               </label>
-               </div>
-            </div>
-          </div>
           <button type="submit" class="btn btn-primary btn-lg btn-block">회원가입 하기</button>
         </form>
       </div>

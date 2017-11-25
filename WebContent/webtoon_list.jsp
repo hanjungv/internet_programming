@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
+	import="java.sql.*, org.cartoon.inha.DBCon, org.cartoon.inha.SecurityUtil" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,6 +13,7 @@
       response.sendRedirect("/12114497_Hanjung/index.jsp");
 		}
 	%>
+	
 	<jsp:include page="./view/webtoon_list.jsp"></jsp:include>
   <jsp:include page="./view/script_default.jsp"></jsp:include>
 </body>

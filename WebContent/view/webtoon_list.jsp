@@ -1,5 +1,33 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
+	import="java.sql.*, org.cartoon.inha.DBCon, org.cartoon.inha.SecurityUtil" %>
+<%
+	request.setCharacterEncoding("utf-8");
+	
+	DBCon DriverManager = new DBCon();
+	Connection con= null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	
+	try {
+		int user_id = (int)session.getAttribute("id");
+	  
+		con = DriverManager.getConnection();
+	  String query = "SELECT cartoon.id as cartoonId, cartoon.title, cartoon.genre, cartoon.summary, cartoon.represent_img, user.name, user.id "
+	  		+"FROM cartoon INNER JOIN user ON cartoon.user_id = user.id";
+	  pstmt = con.prepareStatement(query);
+	  rs = pstmt.executeQuery();
+		System.out.println(rs);
+	 
+	} catch(Exception e) {
+		out.println("오류 : " + e);
+	}
+%>
+<script>
+function goSeries(id){
+	window.location.href='/12114497_Hanjung/series_list.jsp?webtoon_id='+id;
+}
 
+</script>
 <div class="cells-bg-div">
   <jsp:include page="./header.jsp"></jsp:include>
 	<!-- navbar finish -->
@@ -13,65 +41,36 @@
 	      <input class="form-control mr-sm-2" type="text" placeholder="검색하기(작가명, 제목)" aria-label="Search" id="webtoonSearchQuery">
 	    </div>
 	  </div>
-	  <div class="card bg-dark text-white card-custom">
-	    <img class="card-img" src="https://img.adulti01.com/data/file/webtoon/46da75b2929647a00881c3d4ea5a98fe.jpg" alt="Card image">
-	    <div class="card-img-overlay card-img-overlay-custom">
-	      <h4 class="card-title">복학왕</h4>
-	      <p class="card-text">패션왕 우기명이 돌아왔다! 즐거운 대학 생활?! 과연?!</p>
-	      <p class="card-text etc-card-text">genre: 코미디</p>
-	      <p class="card-text etc-card-text">작가: 기안84</p>
-	      <div class="card-guide-button-div">
-	        <input type="checkbox" name="deleteArr" id="webtoon1" value="webtoon1" hidden>        
-	        <button type="button" class="btn btn-outline-warning btn-sm margin-r-5 boxSelectBtn">선택</button>
-	        <button type="button" class="btn btn-outline-danger btn-sm margin-r-5">삭제</button>
-	        <button type="button" class="btn btn-outline-primary btn-sm ">수정</button>
-	      </div>
-	    </div>
-	  </div>
-	  <div class="card bg-dark text-white card-custom">
-	    <img class="card-img" src="http://image.zdnet.co.kr/2016/12/30/leespot_mOnDo29n1snb.jpg" alt="Card image">
-	    <div class="card-img-overlay card-img-overlay-custom">
-	      <h4 class="card-title">외모지상주의</h4>
-	      <p class="card-text">어느날 그에게 일어난 기적같은 일</p>
-	      <p class="card-text etc-card-text">genre: 코미디</p>
-	      <p class="card-text etc-card-text">작가: 박태준</p>
-	      <div class="card-guide-button-div">
-	        <input type="checkbox" name="deleteArr" id="webtoon2" value="webtoon2" hidden>        
-	        <button type="button" class="btn btn-outline-warning btn-sm margin-r-5 boxSelectBtn">선택</button>
-	        <button type="button" class="btn btn-outline-danger btn-sm margin-r-5">삭제</button>
-	        <button type="button" class="btn btn-outline-primary btn-sm ">수정</button>
-	      </div>
-	    </div>
-	  </div>
-	  <div class="card bg-dark text-white card-custom">
-	    <img class="card-img" src="http://mblogthumb2.phinf.naver.net/20140822_145/lovedh1114_1408704835285bXxbx_JPEG/4.jpg?type=w2" alt="Card image">
-	    <div class="card-img-overlay card-img-overlay-custom">
-	        <h4 class="card-title">조의 영역</h4>
-	      <p class="card-text">물에 살던 녀석들의 모습이 상식을 벗어나기 시작했다. '마음의 소리' 조석의 재난 스릴러</p>
-	      <p class="card-text etc-card-text">genre: 스릴러</p>
-	      <p class="card-text etc-card-text">작가: 조석</p>
-	      <div class="card-guide-button-div">
-	        <input type="checkbox" name="deleteArr" id="webtoon3" value="webtoon3" hidden>        
-	        <button type="button" class="btn btn-outline-warning btn-sm margin-r-5 boxSelectBtn">선택</button>
-	        <button type="button" class="btn btn-outline-danger btn-sm margin-r-5">삭제</button>
-	        <button type="button" class="btn btn-outline-primary btn-sm ">수정</button>
-	      </div>
-	    </div>
-	  </div>
-	  <div class="card bg-dark text-white card-custom">
-	    <img class="card-img" src="https://i.ytimg.com/vi/l7kQIFL3eJY/maxresdefault.jpg" alt="Card image">
-	    <div class="card-img-overlay card-img-overlay-custom">
-	      <h4 class="card-title">유미의 세포들</h4>
-	      <p class="card-text">유미와 그녀의 세포들 이야기. 이동건 작가의 컷툰 신작!</p>
-	      <p class="card-text etc-card-text">genre: Drama</p>
-	      <p class="card-text etc-card-text">작가: 이동건</p>
-	      <div class="card-guide-button-div">
-	        <input type="checkbox" name="deleteArr" id="webtoon4" value="webtoon4" hidden>        
-	        <button type="button" class="btn btn-outline-warning btn-sm margin-r-5 boxSelectBtn">선택</button>            
-	        <button type="button" class="btn btn-outline-danger btn-sm margin-r-5">삭제</button>
-	        <button type="button" class="btn btn-outline-primary btn-sm ">수정</button>
-	      </div>
-	    </div>
-	  </div>    
+	  <%
+		  while(rs.next()){
+		  	%>
+		  	<div class="card bg-dark text-white card-custom" onClick='goSeries(<%=rs.getString("cartoonId")%>)'>
+		    <img class="card-img" src="http://localhost:8181/12114497_Hanjung/upload/<%=rs.getString("represent_img") %>" alt="Card image">
+		    <div class="card-img-overlay card-img-overlay-custom">
+		      <h4 class="card-title"><%=rs.getString("title") %></h4>
+		      <p class="card-text"><%=rs.getString("summary") %></p>
+		      <p class="card-text etc-card-text">genre: <%=rs.getString("genre") %></p>
+		      <p class="card-text etc-card-text">작가: <%=rs.getString("name") %></p>
+		      <div class="card-guide-button-div">
+		        <input type="checkbox" name="deleteArr" id="webtoon1" value="webtoon1" hidden>
+		        <%
+		        		int user_id = Integer.parseInt(rs.getString("id"));
+		        		if((int)session.getAttribute("id") == user_id){
+		        			%>
+		        			<button type="button" class="btn btn-outline-warning btn-sm margin-r-5 boxSelectBtn">선택</button>
+				        <button type="button" class="btn btn-outline-danger btn-sm margin-r-5">삭제</button>
+				        <button type="button" class="btn btn-outline-primary btn-sm ">수정</button>
+		        			<%
+		        		}
+		        %>        
+		      </div>
+		    </div>
+		  </div>
+		  	<%
+		  }
+	  rs.close();
+	  pstmt.close();
+	  con.close();
+	  %>
 	</div>    
 </div>

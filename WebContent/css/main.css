@@ -195,7 +195,7 @@ pre{
   height:103vh;
   width:100%;
   background:url('../img/background.png');
-  background-repeat: no-repeat;
+  background-repeat: round;
   clip-path: polygon(0% 0%, 100% 0%, 100% 90%, 0% 100%);
 }
 
