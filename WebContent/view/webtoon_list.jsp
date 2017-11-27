@@ -16,7 +16,6 @@
 	  		+"FROM cartoon INNER JOIN user ON cartoon.user_id = user.id";
 	  pstmt = con.prepareStatement(query);
 	  rs = pstmt.executeQuery();
-		System.out.println(rs);
 	 
 	} catch(Exception e) {
 		out.println("오류 : " + e);
@@ -27,6 +26,19 @@ function goSeries(id){
 	window.location.href='/12114497_Hanjung/series_list.jsp?webtoon_id='+id;
 }
 
+function eraseWebtoon(e, cartoonId){
+  e.stopPropagation();
+  let YN = confirm("삭제하시겠습니까?");
+  if(YN){
+  		window.location.href='/12114497_Hanjung/deleteWebtoonProc.jsp?webtoon_id='+cartoonId;
+  }
+}
+
+function editWebtoon(e, cartoonId){
+	e.stopPropagation();
+	console.log(cartoonId);
+}
+
 </script>
 <div class="cells-bg-div">
   <jsp:include page="./header.jsp"></jsp:include>
@@ -35,8 +47,6 @@ function goSeries(id){
 	  <h2>웹툰 리스트</h2>
 	  <div class="guide-button-div">
 	    <button type="button" class="btn btn-outline-success btn-sm margin-r-5"onClick="window.location.href = '/12114497_Hanjung/webtoon_new.jsp'"><span class="glyphicons glyphicons-plus"></span>웹툰 추가</button>
-	    <button type="button" class="btn btn-outline-danger btn-sm margin-r-5" id="selectedRemoveBtn">선택 삭제</button>
-	    <button type="button" class="btn btn-outline-primary btn-sm margin-r-5" id="selectedResetBtn">선택 초기화</button>
 	    <div class="search-div">
 	      <input class="form-control mr-sm-2" type="text" placeholder="검색하기(작가명, 제목)" aria-label="Search" id="webtoonSearchQuery">
 	    </div>
@@ -56,13 +66,12 @@ function goSeries(id){
 		        <%
 		        		int user_id = Integer.parseInt(rs.getString("id"));
 		        		if((int)session.getAttribute("id") == user_id){
-		        			%>
-		        			<button type="button" class="btn btn-outline-warning btn-sm margin-r-5 boxSelectBtn">선택</button>
-				        <button type="button" class="btn btn-outline-danger btn-sm margin-r-5">삭제</button>
-				        <button type="button" class="btn btn-outline-primary btn-sm ">수정</button>
+      				%>
+				        <button type="button" onClick="eraseWebtoon(event, <%=rs.getString("cartoonId")%>)" class="btn btn-outline-danger btn-sm margin-r-5">삭제</button>
+				        <button type="button" onClick="editWebtoon(event, <%=rs.getString("cartoonId")%>)" class="btn btn-outline-primary btn-sm ">수정</button>
 		        			<%
 		        		}
-		        %>        
+		        			%>        
 		      </div>
 		    </div>
 		  </div>
