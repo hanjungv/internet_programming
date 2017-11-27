@@ -1,62 +1,95 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
+	import="java.sql.*, org.cartoon.inha.DBCon, org.cartoon.inha.SecurityUtil" %>
+<%
+	request.setCharacterEncoding("utf-8");
+	
+	DBCon DriverManager = new DBCon();
+	Connection con= null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	ResultSet rss = null;
+	
+	try {
+		int user_id = (int)session.getAttribute("id");
+	  int webtoon_id = Integer.parseInt(request.getParameter("webtoon_id"));
+		con = DriverManager.getConnection();
+
+	  String query = "SELECT cartoon.title as cartoonTitle, cartoon.summary, cartoon.genre, cartoon.represent_img FROM cartoon where id = ?";
+	  pstmt = con.prepareStatement(query);
+	  pstmt.setInt(1, webtoon_id);
+	  rss = pstmt.executeQuery();
+	  int rowcount = 0;
+	  
+
+		
+	  query = "SELECT series.title as seriesTitle, series.createdAt, series.thumb_img FROM series where cartoon_id = ?";
+	  pstmt = con.prepareStatement(query);
+	  pstmt.setInt(1, webtoon_id);
+	  rs = pstmt.executeQuery();
+	} catch(Exception e) {
+		out.println("오류 : " + e);
+	}
+%>
+
+<script>
+function goAddSeries(webtoon_id){
+	window.location.href='/12114497_Hanjung/series_new.jsp?webtoon_id='+webtoon_id;
+}
+</script>
 
 <!-- navbar start -->
 <div class="cells-bg-div">
   <jsp:include page="./header.jsp"></jsp:include>
+   	<%
+	  		while(rss.next()){
+	  	%>
     <div class="webtoom-meta-div">
       <div class="thumb-img">
-        <img src="https://img.adulti01.com/data/file/webtoon/46da75b2929647a00881c3d4ea5a98fe.jpg" alt="복학왕">
+        <img src="http://localhost:8181/12114497_Hanjung/upload/<%=rss.getString("represent_img") %>" alt="복학왕">
       </div>
       <div class="webtoon-meta-detail-div">
-        <h2>복학왕&nbsp;&nbsp;<span>작가: 기안84</span></h2>
-        <p><pre>패션왕 우기명이 돌아왔다!
-즐거운 대학 생활?! 과연?!</pre>
+        <h2><%=rss.getString("cartoonTitle") %>&nbsp;&nbsp;<span>genre: <%=rss.getString("genre")%></span></h2>
+        <p><pre><%=rss.getString("summary") %></pre>
         </p>
       </div>
     </div>
-	<div class="container container-custom">
-      <!-- guide button -->
-	  <div class="guide-button-div">
-	    <button type="button" class="btn btn-outline-success btn-sm margin-r-5"><span class="glyphicons glyphicons-plus"></span>회차 추가</button>
-	    <div class="search-div">
-	      <input class="form-control mr-sm-2" type="text" placeholder="검색하기(제목)" aria-label="Search" id = "seriesSearchQuery">
-	    </div>
-	  </div>
-  <!-- list -->
-	  <div class="series-list">
-	    <div class="card bg-dark text-white card-series-custom">
-	      <img class="card-img" src="https://img.adulti01.com/data/file/webtoon/46da75b2929647a00881c3d4ea5a98fe.jpg" alt="Card image">
-	      <div class="card-img-overlay card-img-overlay-custom">
-	        <h4 class="card-title">3회차</h4>
-	        <p class="card-text etc-card-text">2017.00.00</p>
-	        <div class="card-guide-button-div">
-	          <button type="button" class="btn btn-outline-danger btn-sm margin-r-5">삭제</button>
-	          <button type="button" class="btn btn-outline-primary btn-sm ">수정</button>
-	        </div>
-	      </div>
-	    </div>
-	    <div class="card bg-dark text-white card-series-custom">
-	      <img class="card-img" src="https://img.adulti01.com/data/file/webtoon/46da75b2929647a00881c3d4ea5a98fe.jpg" alt="Card image">
-	      <div class="card-img-overlay card-img-overlay-custom">
-	        <h4 class="card-title">2회차</h4>
-	        <p class="card-text etc-card-text">2017.00.00</p>
-	        <div class="card-guide-button-div">
-	          <button type="button" class="btn btn-outline-danger btn-sm margin-r-5">삭제</button>
-	          <button type="button" class="btn btn-outline-primary btn-sm ">수정</button>
-	        </div>
-	      </div>
-	    </div>
-	    <div class="card bg-dark text-white card-series-custom">
-	      <img class="card-img" src="https://img.adulti01.com/data/file/webtoon/46da75b2929647a00881c3d4ea5a98fe.jpg" alt="Card image">
-	      <div class="card-img-overlay card-img-overlay-custom">
-	        <h4 class="card-title">1회차</h4>
-	        <p class="card-text etc-card-text">2017.00.00</p>
-	        <div class="card-guide-button-div">
-	          <button type="button" class="btn btn-outline-danger btn-sm margin-r-5">삭제</button>
-	          <button type="button" class="btn btn-outline-primary btn-sm ">수정</button>
-	        </div>
-	      </div>
-	    </div>
+		<div class="container container-custom">
+    <!-- guide button -->
+		  <div class="guide-button-div">
+		    <button type="button" class="btn btn-outline-success btn-sm margin-r-5" onClick="goAddSeries(<%=request.getParameter("webtoon_id")%>)"><span class="glyphicons glyphicons-plus"></span>회차 추가</button>
+		    <div class="search-div">
+		      <input class="form-control mr-sm-2" type="text" placeholder="검색하기(제목)" aria-label="Search" id = "seriesSearchQuery">
+		    </div>
+		  </div>
+	  <%
+	  		}
+	  %>
+  	  <!-- list -->
+  	  <%
+  	 		if(rs.next()){
+  		    rs.beforeFirst(); // not rs.first() because the rs.next() below will move on, missing the first element
+	  			while(rs.next()){
+	  	%>
+			  <div class="series-list">
+			    <div class="card bg-dark text-white card-series-custom">
+			      <img class="card-img" src="http://localhost:8181/12114497_Hanjung/upload/<%=rs.getString("thumb_img") %>" alt="Card image">
+			      <div class="card-img-overlay card-img-overlay-custom">
+			        <h4 class="card-title"><%=rs.getString("seriesTitle") %></h4>
+			        <p class="card-text etc-card-text"><%=rs.getString("createdAt") %></p>
+			        <div class="card-guide-button-div">
+			          <button type="button" class="btn btn-outline-danger btn-sm margin-r-5">삭제</button>
+			          <button type="button" class="btn btn-outline-primary btn-sm ">수정</button>
+			        </div>
+			      </div>
+			    </div>
+    <%
+  			}
+ 		} else {
+    %>
+    		<h1 style="text-align:center; margin-top:150px">시리즈가 없습니다!</h1>
+    <%
+ 		}
+    %>
 	  </div>
 	</div>
 </div>
