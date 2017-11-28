@@ -1,23 +1,50 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
+	import="java.sql.*, org.cartoon.inha.DBCon, org.cartoon.inha.SecurityUtil" %>
+
+<%
+	request.setCharacterEncoding("utf-8");
+	DBCon DriverManager = new DBCon();
+	Connection con= null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	
+	try {
+	  if(request.getParameter("series_id") != null){
+	  		con = DriverManager.getConnection();
+		  String query = "SELECT * FROM series where id = ?";
+		  pstmt = con.prepareStatement(query);
+		  pstmt.setInt(1, Integer.parseInt(request.getParameter("series_id")));
+		  rs = pstmt.executeQuery();
+		  rs.next();
+		  System.out.println(rs.getString("title"));
+	  }
+	} catch(Exception e) {
+		out.println("오류 : " + e);
+	}
+%>
+
 <div class="cells-bg-div">
   <jsp:include page="./header.jsp"></jsp:include>
-  <!-- navbar finish -->
   <div class = "bg-polygon">
     <div class="container container-custom col-sm-6 col-xs-6">
       <div class="form-div-custom">
         <h2>시리즈 등록</h2>
         <hr>
-        <form method="POST" action="/12114497_Hanjung/seriesSaveProc.jsp?webtoon_id=<%=request.getParameter("webtoon_id")%>" enctype="multipart/form-data">
+        <% if(request.getParameter("series_id") == null){ %>
+        <form method="post" action='/12114497_Hanjung/seriesSaveProc.jsp?webtoon_id=<%=request.getParameter("webtoon_id")%>' enctype="multipart/form-data">
+        <% } else { %>
+        <form method="post" action='/12114497_Hanjung/seriesUpdateProc.jsp?series_id=<%=request.getParameter("series_id")%>' enctype="multipart/form-data">
+        <% } %>
           <div class="form-group row">
             <label for="title" class="col-sm-12 col-form-label">제목</label>
             <div class="col-sm-12">
-              <input type="text" class="form-control" id="title" name="title" placeholder="제목을 입력하세요" required>
+              <input type="text" class="form-control" id="title" name="title" placeholder="제목을 입력하세요" value='<%=(request.getParameter("series_id") == null ? "" : rs.getString("title"))%>'required>
             </div>
           </div>
           <div class="form-group row">
             <label for="title" class="col-sm-12 col-form-label">작가의 말</label>
             <div class="col-sm-12">
-              <input type="text" class="form-control" id="comment" name="comment" placeholder="작가의 말을 입력하세요" required>
+              <input type="text" class="form-control" id="comment" name="comment" placeholder="작가의 말을 입력하세요" value='<%=(request.getParameter("series_id") == null ? "" : rs.getString("comment"))%>' required>
             </div>
           </div>
           <div class="form-group row">
