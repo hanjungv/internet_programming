@@ -30,13 +30,13 @@ function eraseWebtoon(e, cartoonId){
   e.stopPropagation();
   let YN = confirm("삭제하시겠습니까?");
   if(YN){
-  		window.location.href='/12114497_Hanjung/deleteWebtoonProc.jsp?webtoon_id='+cartoonId;
+  		window.location.href='/12114497_Hanjung/webtoonDeleteProc.jsp?webtoon_id='+cartoonId;
   }
 }
 
 function editWebtoon(e, cartoonId){
 	e.stopPropagation();
-	console.log(cartoonId);
+	window.location.href='/12114497_Hanjung/webtoon_new.jsp?webtoon_id='+cartoonId;
 }
 
 </script>
@@ -46,7 +46,7 @@ function editWebtoon(e, cartoonId){
 	<div class="container container-custom">
 	  <h2>웹툰 리스트</h2>
 	  <div class="guide-button-div">
-	    <button type="button" class="btn btn-outline-success btn-sm margin-r-5"onClick="window.location.href = '/12114497_Hanjung/webtoon_new.jsp'"><span class="glyphicons glyphicons-plus"></span>웹툰 추가</button>
+	    <button type="button" class="btn btn-outline-success btn-sm margin-r-5" onClick="window.location.href = '/12114497_Hanjung/webtoon_new.jsp'"><span class="glyphicons glyphicons-plus"></span>웹툰 추가</button>
 	    <div class="search-div">
 	      <input class="form-control mr-sm-2" type="text" placeholder="검색하기(작가명, 제목)" aria-label="Search" id="webtoonSearchQuery">
 	    </div>

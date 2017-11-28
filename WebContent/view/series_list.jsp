@@ -18,16 +18,13 @@
 	  pstmt = con.prepareStatement(query);
 	  pstmt.setInt(1, webtoon_id);
 	  rss = pstmt.executeQuery();
-	  int rowcount = 0;
-	  
-
-		
+	
 	  query = "SELECT series.title as seriesTitle, series.createdAt, series.thumb_img FROM series where cartoon_id = ?";
 	  pstmt = con.prepareStatement(query);
 	  pstmt.setInt(1, webtoon_id);
 	  rs = pstmt.executeQuery();
 	} catch(Exception e) {
-		out.println("오류 : " + e);
+		System.out.println("오류 : " + e);
 	}
 %>
 
@@ -67,21 +64,21 @@ function goAddSeries(webtoon_id){
   	  <!-- list -->
   	  <%
   	 		if(rs.next()){
-  		    rs.beforeFirst(); // not rs.first() because the rs.next() below will move on, missing the first element
+  		    rs.beforeFirst(); 
 	  			while(rs.next()){
 	  	%>
-			  <div class="series-list">
-			    <div class="card bg-dark text-white card-series-custom">
-			      <img class="card-img" src="http://localhost:8181/12114497_Hanjung/upload/<%=rs.getString("thumb_img") %>" alt="Card image">
-			      <div class="card-img-overlay card-img-overlay-custom">
-			        <h4 class="card-title"><%=rs.getString("seriesTitle") %></h4>
-			        <p class="card-text etc-card-text"><%=rs.getString("createdAt") %></p>
-			        <div class="card-guide-button-div">
-			          <button type="button" class="btn btn-outline-danger btn-sm margin-r-5">삭제</button>
-			          <button type="button" class="btn btn-outline-primary btn-sm ">수정</button>
-			        </div>
-			      </div>
-			    </div>
+		  <div class="series-list">
+		    <div class="card bg-dark text-white card-series-custom">
+		      <img class="card-img" src="http://localhost:8181/12114497_Hanjung/upload/<%=rs.getString("thumb_img") %>" alt="Card image">
+		      <div class="card-img-overlay card-img-overlay-custom">
+		        <h4 class="card-title"><%=rs.getString("seriesTitle") %></h4>
+		        <p class="card-text etc-card-text"><%=rs.getString("createdAt") %></p>
+		        <div class="card-guide-button-div">
+		          <button type="button" class="btn btn-outline-danger btn-sm margin-r-5">삭제</button>
+		          <button type="button" class="btn btn-outline-primary btn-sm ">수정</button>
+		        </div>
+		      </div>
+		    </div>
     <%
   			}
  		} else {
