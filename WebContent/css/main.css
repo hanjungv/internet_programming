@@ -234,3 +234,8 @@ pre{
 .form-check-input{
 		margin-right:5px;
 }
+
+#webtoonSearchQuery{
+		display:inline-flex;
+		width:80%;
+}

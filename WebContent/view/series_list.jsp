@@ -20,8 +20,16 @@
 	  rss = pstmt.executeQuery();
 	
 	  query = "SELECT * FROM series where cartoon_id = ?";
+	  if(request.getParameter("search") != null){
+			query = "SELECT * FROM series where cartoon_id = ? AND title LIKE ?";
+		}
+	  
 	  pstmt = con.prepareStatement(query);
 	  pstmt.setInt(1, webtoon_id);
+	  if(request.getParameter("search") != null){
+			String para = request.getParameter("search");
+	  		pstmt.setString(2, "%"+ para + "%");
+	  }
 	  rs = pstmt.executeQuery();
 	} catch(Exception e) {
 		System.out.println("오류 : " + e);
@@ -50,7 +58,11 @@
 		  <div class="guide-button-div">
 		    <button type="button" class="btn btn-outline-success btn-sm margin-r-5" onClick="goAddSeries(<%=request.getParameter("webtoon_id")%>)"><span class="glyphicons glyphicons-plus"></span>회차 추가</button>
 		    <div class="search-div">
-		      <input class="form-control mr-sm-2" type="text" placeholder="검색하기(제목)" aria-label="Search" id = "seriesSearchQuery">
+			    <form method='get' action='' style="width:100%">
+			    		<input type="hidden" name="webtoon_id" value="<%=request.getParameter("webtoon_id") %>" />
+		      		<input class="form-control mr-sm-2" type="text" name="search" placeholder="검색하기(제목)" aria-label="Search" id="webtoonSearchQuery" >
+		        <button type="submit" class="btn btn-outline-info btn-sm">검색</button>
+		      </form>
 		    </div>
 		  </div>
 	  <%

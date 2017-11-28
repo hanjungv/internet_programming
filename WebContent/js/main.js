@@ -1,6 +1,7 @@
 /**
  * 
  */
+
 $(document).ready(function(){
   let $allRadio = $("input[type='radio'");
   let $makeSeriesBtn = $("#makeSeriesBtn");
@@ -57,18 +58,8 @@ $(document).ready(function(){
     }
   });
 
-  //웹툰 리스트 라이브서치
-  $webtoonSearchQuery.keyup(function(){
-    console.log($webtoonSearchQuery.val()); //값이 변경될 경우 live search를 구현할 부분
-  });
-
-  //시리즈 리스트 부분 라이브서치
-  $seriesSearchQuery.keyup(function(){
-    console.log($seriesSearchQuery.val()); //값이 변경될 경우 live search를 구현할 부분
-  });
-
-
   $agreementAnchor.click(function(){
     $(".bg-polygon").css('clip-path','polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)').css('height','175vh');
   });
+  
 });
