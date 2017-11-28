@@ -10,21 +10,21 @@
 	
 	try {
 		int user_id = (int)session.getAttribute("id");
+	  
 		con = DriverManager.getConnection();
-		String query = "SELECT cartoon.id as cartoonId, cartoon.title, cartoon.genre, cartoon.summary, cartoon.represent_img, user.name, user.id "
+	  String query = "SELECT cartoon.id as cartoonId, cartoon.title, cartoon.genre, cartoon.summary, cartoon.represent_img, user.name, user.id "
 	  		+"FROM cartoon INNER JOIN user ON cartoon.user_id = user.id";
-		
-		if(request.getParameter("search") != null){
+	  
+	  if(request.getParameter("search") != null){
 			query = "SELECT cartoon.id as cartoonId, cartoon.title, cartoon.genre, cartoon.summary, cartoon.represent_img, user.name, user.id "
-		  		+"FROM cartoon INNER JOIN user ON cartoon.user_id = user.id WHERE cartoon.title LIKE ?";
+		  		+"FROM cartoon INNER JOIN user ON cartoon.user_id = user.id WHERE cartoon.title LIKE ? OR user.name LIKE ?";
 		}
-		
 	  pstmt = con.prepareStatement(query);
 	  if(request.getParameter("search") != null){
-			String para = request.getParameter("search");
+		  	String para = request.getParameter("search");
 	  		pstmt.setString(1, "%"+ para + "%");
+	  		pstmt.setString(2, "%"+ para + "%");
 	  }
-	  
 	  rs = pstmt.executeQuery();
 	 
 	} catch(Exception e) {
@@ -39,15 +39,15 @@
 	  <div class="guide-button-div">
 	    <button type="button" class="btn btn-outline-success btn-sm margin-r-5" onClick="window.location.href = '/12114497_Hanjung/webtoon_new.jsp'"><span class="glyphicons glyphicons-plus"></span>웹툰 추가</button>
 	    <div class="search-div">
-	    		<form method='get' action='on_id") %>' style="wth:100%">
-	      		<input class="form-control mr-sm-2" type="text" name="search" placeholder="검색하기(작가명, 제목)" aria-label="Search" id="webtoonSearchQuery" >
-	        <button type="submit" class="btn btn-outline-info btn-sm">검색</button>
-	      </form>
+	    		<form method='get' action='' style="width:100%">
+       		<input class="form-control mr-sm-2" type="text" name="search" placeholder="검색하기(작가명, 제목)" aria-label="Search" id="webtoonSearchQuery" >
+ 	        <button type="submit" class="btn btn-outline-info btn-sm">검색</button>
+ 	      </form>
 	    </div>
-	  </di
-		  >
-	  <% while(rs.
-		  	ext()){ %>
+	  </div>
+	  <%
+		  while(rs.next()){
+		  	%>
 		  	<div class="card bg-dark text-white card-custom" onClick='goSeries(<%=rs.getString("cartoonId")%>)'>
 		    <img class="card-img" src="http://localhost:8181/12114497_Hanjung/upload/<%=rs.getString("represent_img") %>" alt="Card image">
 		    <div class="card-img-overlay card-img-overlay-custom">
@@ -82,7 +82,6 @@
 function goSeries(id){
 	window.location.href='/12114497_Hanjung/series_list.jsp?webtoon_id='+id;
 }
-
 function eraseWebtoon(e, cartoonId){
   e.stopPropagation();
   let YN = confirm("삭제하시겠습니까?");
@@ -90,11 +89,8 @@ function eraseWebtoon(e, cartoonId){
   		window.location.href='/12114497_Hanjung/webtoonDeleteProc.jsp?webtoon_id='+cartoonId;
   }
 }
-
 function editWebtoon(e, cartoonId){
 	e.stopPropagation();
 	window.location.href='/12114497_Hanjung/webtoon_new.jsp?webtoon_id='+cartoonId;
 }
 </script>
-
-
