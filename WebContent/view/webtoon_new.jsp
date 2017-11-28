@@ -21,7 +21,7 @@
 		out.println("오류 : " + e);
 	}
 %>
-	
+
 <div class="cells-bg-div">
   <jsp:include page="./header.jsp"></jsp:include>
  	<div class="bg-polygon">
@@ -43,7 +43,7 @@
           <div class="form-group row">
             <label for="inputPassword" class="col-sm-12 col-form-label">장르</label>
             <div class="col-sm-12">
-              <select name="genre" id="genre" class="form-control" value='<%=(request.getParameter("webtoon_id") == null ? "" : rs.getString("genre")) %>'>
+              <select name="genre" id="genre" class="form-control">
                 <option value="action">액션</option>
                 <option value="comedy">코미디</option>
                 <option value="romance">로맨스</option>
@@ -70,3 +70,8 @@
     </div>
   </div>
 </div>
+
+<script>
+let genreVal = "<%=(request.getParameter("webtoon_id") == null ? "action" : rs.getString("genre")) %>";
+document.getElementById("genre").value = genreVal; //genre setting
+</script>

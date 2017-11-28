@@ -69,6 +69,6 @@ $(document).ready(function(){
 
 
   $agreementAnchor.click(function(){
-    $(".bg-polygon").css('clip-path','polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)').css('height','106vh');
+    $(".bg-polygon").css('clip-path','polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)').css('height','175vh');
   });
 });

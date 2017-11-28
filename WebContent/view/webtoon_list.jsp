@@ -21,25 +21,6 @@
 		out.println("오류 : " + e);
 	}
 %>
-<script>
-function goSeries(id){
-	window.location.href='/12114497_Hanjung/series_list.jsp?webtoon_id='+id;
-}
-
-function eraseWebtoon(e, cartoonId){
-  e.stopPropagation();
-  let YN = confirm("삭제하시겠습니까?");
-  if(YN){
-  		window.location.href='/12114497_Hanjung/webtoonDeleteProc.jsp?webtoon_id='+cartoonId;
-  }
-}
-
-function editWebtoon(e, cartoonId){
-	e.stopPropagation();
-	window.location.href='/12114497_Hanjung/webtoon_new.jsp?webtoon_id='+cartoonId;
-}
-
-</script>
 <div class="cells-bg-div">
   <jsp:include page="./header.jsp"></jsp:include>
 	<!-- navbar finish -->
@@ -83,3 +64,24 @@ function editWebtoon(e, cartoonId){
 	  %>
 	</div>    
 </div>
+
+<script>
+function goSeries(id){
+	window.location.href='/12114497_Hanjung/series_list.jsp?webtoon_id='+id;
+}
+
+function eraseWebtoon(e, cartoonId){
+  e.stopPropagation();
+  let YN = confirm("삭제하시겠습니까?");
+  if(YN){
+  		window.location.href='/12114497_Hanjung/webtoonDeleteProc.jsp?webtoon_id='+cartoonId;
+  }
+}
+
+function editWebtoon(e, cartoonId){
+	e.stopPropagation();
+	window.location.href='/12114497_Hanjung/webtoon_new.jsp?webtoon_id='+cartoonId;
+}
+</script>
+
+

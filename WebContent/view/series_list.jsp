@@ -14,12 +14,12 @@
 	  int webtoon_id = Integer.parseInt(request.getParameter("webtoon_id"));
 		con = DriverManager.getConnection();
 
-	  String query = "SELECT cartoon.title as cartoonTitle, cartoon.summary, cartoon.genre, cartoon.represent_img FROM cartoon where id = ?";
+	  String query = "SELECT title as cartoonTitle, summary, genre, represent_img FROM cartoon where id = ?";
 	  pstmt = con.prepareStatement(query);
 	  pstmt.setInt(1, webtoon_id);
 	  rss = pstmt.executeQuery();
 	
-	  query = "SELECT series.title as seriesTitle, series.createdAt, series.thumb_img FROM series where cartoon_id = ?";
+	  query = "SELECT * FROM series where cartoon_id = ?";
 	  pstmt = con.prepareStatement(query);
 	  pstmt.setInt(1, webtoon_id);
 	  rs = pstmt.executeQuery();
@@ -28,11 +28,6 @@
 	}
 %>
 
-<script>
-function goAddSeries(webtoon_id){
-	window.location.href='/12114497_Hanjung/series_new.jsp?webtoon_id='+webtoon_id;
-}
-</script>
 
 <!-- navbar start -->
 <div class="cells-bg-div">
@@ -71,11 +66,11 @@ function goAddSeries(webtoon_id){
 		    <div class="card bg-dark text-white card-series-custom">
 		      <img class="card-img" src="http://localhost:8181/12114497_Hanjung/upload/<%=rs.getString("thumb_img") %>" alt="Card image">
 		      <div class="card-img-overlay card-img-overlay-custom">
-		        <h4 class="card-title"><%=rs.getString("seriesTitle") %></h4>
+		        <h4 class="card-title"><%=rs.getString("title") %></h4>
 		        <p class="card-text etc-card-text"><%=rs.getString("createdAt") %></p>
 		        <div class="card-guide-button-div">
-		          <button type="button" class="btn btn-outline-danger btn-sm margin-r-5">삭제</button>
-		          <button type="button" class="btn btn-outline-primary btn-sm ">수정</button>
+		          <button type="button" class="btn btn-outline-danger btn-sm margin-r-5" onClick="eraseSeries(event, <%=rs.getInt("id") %>)">삭제</button>
+		          <button type="button" class="btn btn-outline-primary btn-sm" onClick="editSeries(event, <%=rs.getInt("id") %>)">수정</button>
 		        </div>
 		      </div>
 		    </div>
@@ -90,4 +85,25 @@ function goAddSeries(webtoon_id){
 	  </div>
 	</div>
 </div>
+
+
+<script>
+function goAddSeries(webtoon_id){
+	window.location.href='/12114497_Hanjung/series_new.jsp?webtoon_id='+webtoon_id;
+}
+
+function eraseSeries(e, seriesId){
+  e.stopPropagation();
+  let YN = confirm("삭제하시겠습니까?");
+  console.log(seriesId,"hello!");
+  if(YN){
+  		window.location.href='/12114497_Hanjung/seriesDeleteProc.jsp?series_id='+seriesId;
+  }
+}
+
+function editSeries(e, seriesId){
+	e.stopPropagation();
+	window.location.href='/12114497_Hanjung/series_new.jsp?series_id='+seriesId;
+}
+</script>
    
