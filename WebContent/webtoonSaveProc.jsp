@@ -18,7 +18,10 @@ import="java.util.*, java.io.*"
 	Connection con= null;
 	PreparedStatement pstmt = null;
 	int maxsize = 5*1024*1024;
-	String realFolder = "/Users/hanjung/12114497/12114497_Hanjung/WebContent/upload";
+	// String realFolder = "/Users/hanjung/12114497/12114497_Hanjung/WebContent/upload";
+	
+	ServletContext context = getServletContext();
+	String realFolder = context.getRealPath("upload");
 
 	try {
 		MultipartRequest multi = new MultipartRequest(request, realFolder, maxsize, "utf-8", new DefaultFileRenamePolicy());

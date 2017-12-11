@@ -14,7 +14,8 @@
 	  int webtoon_id = Integer.parseInt(request.getParameter("webtoon_id"));
 		con = DriverManager.getConnection();
 
-	  String query = "SELECT title as cartoonTitle, summary, genre, represent_img FROM cartoon where id = ?";
+	  String query = "SELECT	cartoon.title as cartoonTitle, cartoon.summary, cartoon.genre, cartoon.represent_img, cartoon.user_id, user.id"
+	  		+" FROM cartoon INNER JOIN user ON cartoon.user_id = user.id where cartoon.id = ? ";
 	  pstmt = con.prepareStatement(query);
 	  pstmt.setInt(1, webtoon_id);
 	  rss = pstmt.executeQuery();
@@ -40,12 +41,10 @@
 <!-- navbar start -->
 <div class="cells-bg-div">
   <jsp:include page="./header.jsp"></jsp:include>
-   	<%
-	  		while(rss.next()){
-	  	%>
+   	<% while(rss.next()){ %>
     <div class="webtoom-meta-div">
       <div class="thumb-img">
-        <img src="http://localhost:8181/12114497_Hanjung/upload/<%=rss.getString("represent_img") %>" alt="복학왕">
+        <img src="http://localhost:8080/12114497_Hanjung/upload/<%=rss.getString("represent_img") %>" alt="복학왕">
       </div>
       <div class="webtoon-meta-detail-div">
         <h2><%=rss.getString("cartoonTitle") %>&nbsp;&nbsp;<span>genre: <%=rss.getString("genre")%></span></h2>
@@ -54,9 +53,10 @@
       </div>
     </div>
 		<div class="container container-custom">
-    <!-- guide button -->
 		  <div class="guide-button-div">
+		  <% if((int)session.getAttribute("id") == Integer.parseInt(rss.getString("id"))){ %>
 		    <button type="button" class="btn btn-outline-success btn-sm margin-r-5" onClick="goAddSeries(<%=request.getParameter("webtoon_id")%>)"><span class="glyphicons glyphicons-plus"></span>회차 추가</button>
+		    <% } %>
 		    <div class="search-div">
 			    <form method='get' action='' style="width:100%">
 			    		<input type="hidden" name="webtoon_id" value="<%=request.getParameter("webtoon_id") %>" />
@@ -65,18 +65,11 @@
 		      </form>
 		    </div>
 		  </div>
-	  <%
-	  		}
-	  %>
-  	  <!-- list -->
-  	  <%
-  	 		if(rs.next()){
-  		    rs.beforeFirst(); 
-	  			while(rs.next()){
-	  	%>
+	  <% } %>
+  	  <% if(rs.next()){ rs.beforeFirst();  while(rs.next()){ %>
 		  <div class="series-list">
 		    <div class="card bg-dark text-white card-series-custom">
-		      <img class="card-img" src="http://localhost:8181/12114497_Hanjung/upload/<%=rs.getString("thumb_img") %>" alt="Card image">
+		      <img class="card-img" src="http://localhost:8080/12114497_Hanjung/upload/<%=rs.getString("thumb_img") %>" alt="Card image">
 		      <div class="card-img-overlay card-img-overlay-custom">
 		        <h4 class="card-title"><%=rs.getString("title") %></h4>
 		        <p class="card-text etc-card-text"><%=rs.getString("createdAt") %></p>
@@ -86,14 +79,9 @@
 		        </div>
 		      </div>
 		    </div>
-    <%
-  			}
- 		} else {
-    %>
+    <% } } else { %>
     		<h1 style="text-align:center; margin-top:150px">시리즈가 없습니다!</h1>
-    <%
- 		}
-    %>
+    <% } %>
 	  </div>
 	</div>
 </div>

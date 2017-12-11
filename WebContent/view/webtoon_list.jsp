@@ -2,7 +2,6 @@
 	import="java.sql.*, org.cartoon.inha.DBCon, org.cartoon.inha.SecurityUtil" %>
 <%
 	request.setCharacterEncoding("utf-8");
-	
 	DBCon DriverManager = new DBCon();
 	Connection con= null;
 	PreparedStatement pstmt = null;
@@ -33,7 +32,6 @@
 %>
 <div class="cells-bg-div">
   <jsp:include page="./header.jsp"></jsp:include>
-	<!-- navbar finish -->
 	<div class="container container-custom">
 	  <h2>웹툰 리스트</h2>
 	  <div class="guide-button-div">
@@ -45,11 +43,9 @@
  	      </form>
 	    </div>
 	  </div>
-	  <%
-		  while(rs.next()){
-		  	%>
+	  <% while(rs.next()){ %>
 		  	<div class="card bg-dark text-white card-custom" onClick='goSeries(<%=rs.getString("cartoonId")%>)'>
-		    <img class="card-img" src="http://localhost:8181/12114497_Hanjung/upload/<%=rs.getString("represent_img") %>" alt="Card image">
+		    <img class="card-img" src="http://localhost:8080/12114497_Hanjung/upload/<%=rs.getString("represent_img") %>" alt="Card image">
 		    <div class="card-img-overlay card-img-overlay-custom">
 		      <h4 class="card-title"><%=rs.getString("title") %></h4>
 		      <p class="card-text"><%=rs.getString("summary") %></p>
@@ -57,15 +53,10 @@
 		      <p class="card-text etc-card-text">작가: <%=rs.getString("name") %></p>
 		      <div class="card-guide-button-div">
 		        <input type="checkbox" name="deleteArr" id="webtoon1" value="webtoon1" hidden>
-		        <%
-		        		int user_id = Integer.parseInt(rs.getString("id"));
-		        		if((int)session.getAttribute("id") == user_id){
-      				%>
-				        <button type="button" onClick="eraseWebtoon(event, <%=rs.getString("cartoonId")%>)" class="btn btn-outline-danger btn-sm margin-r-5">삭제</button>
-				        <button type="button" onClick="editWebtoon(event, <%=rs.getString("cartoonId")%>)" class="btn btn-outline-primary btn-sm ">수정</button>
-		        			<%
-		        		}
-		        			%>        
+		        <% if((int)session.getAttribute("id") == Integer.parseInt(rs.getString("id"))){ %>
+			        <button type="button" onClick="eraseWebtoon(event, <%=rs.getString("cartoonId")%>)" class="btn btn-outline-danger btn-sm margin-r-5">삭제</button>
+			        <button type="button" onClick="editWebtoon(event, <%=rs.getString("cartoonId")%>)" class="btn btn-outline-primary btn-sm ">수정</button>
+        			<% } %>        
 		      </div>
 		    </div>
 		  </div>

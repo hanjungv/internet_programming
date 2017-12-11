@@ -38,25 +38,25 @@
           <div class="form-group row">
             <label for="title" class="col-sm-12 col-form-label">제목</label>
             <div class="col-sm-12">
-              <input type="text" class="form-control" id="title" name="title" placeholder="제목을 입력하세요" value='<%=(request.getParameter("series_id") == null ? "" : rs.getString("title"))%>'required>
+              <input type="text" class="form-control" id="title" name="title" placeholder="제목을 입력하세요" value='<%=(request.getParameter("series_id") == null ? "" : rs.getString("title"))%>'>
             </div>
           </div>
           <div class="form-group row">
             <label for="title" class="col-sm-12 col-form-label">작가의 말</label>
             <div class="col-sm-12">
-              <input type="text" class="form-control" id="comment" name="comment" placeholder="작가의 말을 입력하세요" value='<%=(request.getParameter("series_id") == null ? "" : rs.getString("comment"))%>' required>
+              <input type="text" class="form-control" id="comment" name="comment" placeholder="작가의 말을 입력하세요" value='<%=(request.getParameter("series_id") == null ? "" : rs.getString("comment"))%>' >
             </div>
           </div>
           <div class="form-group row">
             <label for="inputPassword" class="col-sm-12 col-form-label">썸네일 이미지</label>
             <div class="col-sm-12">
-              <input type="file" name="thumb_img" class="form-control-file" id="exampleFormControlFile1" required>
+              <input type="file" name="thumb_img" class="form-control-file" id="exampleFormControlFile1" >
             </div>
           </div>
           <div class="form-group row">
             <label for="inputPassword" class="col-sm-12 col-form-label">만화 그림파일</label>
             <div class="col-sm-12">
-              <input type="file" name="cartoon_img" class="form-control-file" id="exampleFormControlFile1" required>
+              <input type="file" name="cartoon_img" class="form-control-file" id="exampleFormControlFile1" >
             </div>
           </div>
           <div class="consent-div">

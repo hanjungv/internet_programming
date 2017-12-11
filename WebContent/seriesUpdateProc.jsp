@@ -16,9 +16,12 @@ import="java.util.*, java.io.*"
 	DBCon DriverManager = new DBCon();
 	Connection con= null;
 	PreparedStatement pstmt = null;
+	ResultSet rs = null;
 	int maxsize = 5*1024*1024;
-	String realFolder = "/Users/hanjung/12114497/12114497_Hanjung/WebContent/upload";
-
+	//String realFolder = "/Users/hanjung/12114497/12114497_Hanjung/WebContent/upload";
+	ServletContext context = getServletContext();
+	String realFolder = context.getRealPath("upload");
+	
 	try {
 		MultipartRequest multi = new MultipartRequest(request, realFolder, maxsize, "utf-8", new DefaultFileRenamePolicy());
 		
@@ -30,17 +33,67 @@ import="java.util.*, java.io.*"
 		int series_id = Integer.parseInt(request.getParameter("series_id"));
 	
 		con = DriverManager.getConnection();
-	  String query = "UPDATE series SET title=?, comment=?, thumb_img=?, cartoon_img=? WHERE id=?";
+		
+		String query = "SELECT * FROM series WHERE id=?";
+		pstmt = con.prepareStatement(query);
+		pstmt.setInt(1, series_id);
+		rs = pstmt.executeQuery();
+		
+		
+	  query = "UPDATE series SET title=?, comment=?, thumb_img=?, cartoon_img=? WHERE id=?";
+	 	if(thumb_img == null){
+	 		if(cartoon_img == null){
+	 			query = "UPDATE series SET title=?, comment=? WHERE id=?";
+ 			} else {
+ 				query = "UPDATE series SET title=?, comment=?, cartoon_img=? WHERE id=?";
+ 			}
+ 		} else {
+ 			if(cartoon_img == null){
+ 				query = "UPDATE series SET title=?, comment=?, thumb_img=? WHERE id=?";
+ 			}
+ 		}
 	  
 	  pstmt = con.prepareStatement(query);
-
 	  pstmt.setString(1,title);
 	  pstmt.setString(2,comment);
-	  pstmt.setString(3,thumb_img);
-	  pstmt.setString(4,cartoon_img);
-	  pstmt.setInt(5,series_id);
-
-	  int n = pstmt.executeUpdate();
+	  
+	 	if(thumb_img == null){
+	 		if(cartoon_img == null){
+	 		  pstmt.setInt(3,series_id);
+	 		} else {
+		  		while(rs.next()){	
+		 			File file = new File(realFolder + "/" + rs.getString("cartoon_img"));
+					//File file = new File(realFolder + "\\" + rs.getString("cartoon_img")); // windows
+					file.delete();
+		  		}
+	 			pstmt.setString(3, cartoon_img);
+	 		  pstmt.setInt(4,series_id);
+	 		}
+	 	} else {
+	 		if(cartoon_img == null){
+	 			while(rs.next()){	
+		 			File file = new File(realFolder + "/" + rs.getString("thumb_img"));
+					//File file = new File(realFolder + "\\" + rs.getString("thumb_img")); // windows
+					file.delete();
+		  		}
+	 			pstmt.setString(3, thumb_img);
+	 			pstmt.setInt(4,series_id);
+	 		} else {
+	 			while(rs.next()){	
+		 			File file = new File(realFolder + "/" + rs.getString("thumb_img"));
+					//File file = new File(realFolder + "\\" + rs.getString("thumb_img")); // windows
+					file.delete();
+					File file2 = new File(realFolder + "/" + rs.getString("cartoon_img"));
+					//File file2 = new File(realFolder + "\\" + rs.getString("cartoon_img")); // windows
+					file2.delete();
+		  		}
+	 			pstmt.setString(3,thumb_img);
+	 		  pstmt.setString(4,cartoon_img);
+	 		  pstmt.setInt(5,series_id);
+	 		}
+	 	}
+	  
+	  pstmt.executeUpdate();
 	  
 	  pstmt.close();
 	  con.close();
