@@ -56,7 +56,7 @@
 		  <div class="guide-button-div">
 		  <% if((int)session.getAttribute("id") == Integer.parseInt(rss.getString("id"))){ %>
 		    <button type="button" class="btn btn-outline-success btn-sm margin-r-5" onClick="goAddSeries(<%=request.getParameter("webtoon_id")%>)"><span class="glyphicons glyphicons-plus"></span>회차 추가</button>
-		    <% } %>
+	    <% } %>
 		    <div class="search-div">
 			    <form method='get' action='' style="width:100%">
 			    		<input type="hidden" name="webtoon_id" value="<%=request.getParameter("webtoon_id") %>" />
@@ -65,7 +65,7 @@
 		      </form>
 		    </div>
 		  </div>
-	  <% } %>
+	  
   	  <% if(rs.next()){ rs.beforeFirst();  while(rs.next()){ %>
 		  <div class="series-list">
 		    <div class="card bg-dark text-white card-series-custom">
@@ -73,14 +73,17 @@
 		      <div class="card-img-overlay card-img-overlay-custom">
 		        <h4 class="card-title"><%=rs.getString("title") %></h4>
 		        <p class="card-text etc-card-text"><%=rs.getString("createdAt") %></p>
-		        <div class="card-guide-button-div">
-		          <button type="button" class="btn btn-outline-danger btn-sm margin-r-5" onClick="eraseSeries(event, <%=rs.getInt("id") %>)">삭제</button>
-		          <button type="button" class="btn btn-outline-primary btn-sm" onClick="editSeries(event, <%=rs.getInt("id") %>)">수정</button>
-		        </div>
+        		  <% if((int)session.getAttribute("id") == Integer.parseInt(rss.getString("id"))){ %>
+			        <div class="card-guide-button-div">
+			          <button type="button" class="btn btn-outline-danger btn-sm margin-r-5" onClick="eraseSeries(event, <%=rs.getInt("id") %>)">삭제</button>
+			          <button type="button" class="btn btn-outline-primary btn-sm" onClick="editSeries(event, <%=rs.getInt("id") %>)">수정</button>
+			        </div>
+		        <%} %>
 		      </div>
 		    </div>
     <% } } else { %>
     		<h1 style="text-align:center; margin-top:150px">시리즈가 없습니다!</h1>
+    <% } %>
     <% } %>
 	  </div>
 	</div>

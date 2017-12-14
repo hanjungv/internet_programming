@@ -6,7 +6,6 @@ import="java.sql.*, org.cartoon.inha.DBCon, org.cartoon.inha.SecurityUtil" error
 	}
 %>
 <%
-
 		request.setCharacterEncoding("utf-8");
 
 		DBCon DriverManager = new DBCon();
